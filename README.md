@@ -1,45 +1,11 @@
-# Smart Home Command Pattern
+# Smart Home Automation
 
-This is a small Java example of the **Command Pattern**. A command wraps one
-action for one device, so the `SmartHomeHub` only knows how to execute a
-command. It does not need to know how a light, thermostat, or music player
-works internally.
+Imagine you're building a smart home automation system where various devices (lights, thermostat, music player, etc.) can be controlled remotely using a central hub or app. Each device has different functionalities, but you want to create a unified and flexible control mechanism.
 
-## Project structure
+Design a system that allows you to control multiple smart home devices with ease. Your goal is to create a solution where:
 
-```text
-commands/   Command interface and device-specific commands
-devices/    Smart home devices and their actions
-invokers/   SmartHomeHub, which runs commands
-Main.java   Simple example application
-```
-
-## Run the example
-
-From the project folder:
-
-```bash
-mkdir -p out
-javac -d out Main.java commands/*.java devices/*.java invokers/*.java
-java -cp out Main
-```
-
-## Adding another device
-
-Create the device in `devices/`, then create a command in `commands/` that
-implements `Command`. The hub does not need to change:
-
-```java
-public class TurnOnFanCommand implements Command {
-	private final Fan fan;
-
-	public TurnOnFanCommand(Fan fan) {
-		this.fan = fan;
-	}
-
-	@Override
-	public void execute() {
-		fan.turnOn();
-	}
-}
-```
+You can control a variety of devices from a central hub or app, sending commands like "Turn On," "Turn Off," "Increase Temperature," "Decrease Volume," etc.
+Each device has unique actions associated with these commands. For example, turning on the lights might involve changing their brightness level, while turning on the music player may involve playing a specific playlist.
+New devices can be seamlessly integrated into the system without modifying existing code. You want to ensure that adding a new device doesn't require changes to the central control logic.
+Devices can be controlled without the central hub or app needing to understand the internal workings of each device. It should send high-level commands without needing low-level details.
+Your challenge is to apply a design pattern that provides a flexible and scalable way to control a variety of smart home devices, ensuring that new devices can be added without disrupting the existing system's functionality.
